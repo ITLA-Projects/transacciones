@@ -12,6 +12,7 @@ require_once '../helpers/FileHandler/SerializationFileHandler.php';
 $layout = new Layout(true);
 $utilities = new Utilities();
 $service = new TransaccionServiceFile();
+$serializeLog = new SerializationFileHandler("data","log");
 
 //solo actua si existe el id
 if (isset($_GET['id'])) {
@@ -24,7 +25,7 @@ if (isset($_GET['id'])) {
     if (isset($_POST['monto']) && isset($_POST['descripcion'])) {
 
         $nuevaTransaccion = new Transaccion();
-
+        date_default_timezone_set("America/Santo_Domingo");
         $nuevaTransaccion->initializeData(
             0,
             date("Y/m/d") . "-" . date("h:i:s"),
@@ -33,6 +34,9 @@ if (isset($_GET['id'])) {
         );
 
         $service->Update($transaccionId, $nuevaTransaccion);
+
+        $serializeLog->SaveFile("Se Edito la transaccion con el id: " . $transaccionId . ", la fecha " . date("Y/m/d") . "-" . date("h:i:s")
+        . ", con el monto de " . $_POST['monto'] . " y con la Descripcion: " . $_POST['descripcion']);
 
         header("Location: ../index.php");
         exit();

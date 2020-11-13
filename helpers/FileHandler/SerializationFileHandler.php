@@ -18,18 +18,7 @@ class SerializationFileHandler implements IFileHandler
         }
     }
 
-    function SaveFile($value)
-    {
 
-        $this->CreateDirectory($this->directory);
-        $path = $this->directory . "/" . $this->filename . ".txt";
-
-        $serializeData = serialize($value);
-
-        $file = fopen($path, "w+");
-        fwrite($file, $serializeData);
-        fclose($file);
-    }
 
     function ReadFile()
     {
@@ -45,6 +34,21 @@ class SerializationFileHandler implements IFileHandler
         } else {
             return false;
         }
+    }
+
+    function SaveFile($value)
+    {
+
+        $this->CreateDirectory($this->directory);
+        $path = $this->directory . "/" . $this->filename . ".txt";
+
+        
+
+        $serializeData = serialize($value);
+
+        $file = fopen($path, "a");
+        fwrite($file, $serializeData . PHP_EOL);
+        fclose($file);
     }
 
     function LoadCustomFile($path)

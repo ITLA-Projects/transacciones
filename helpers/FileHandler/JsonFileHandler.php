@@ -49,13 +49,11 @@ class JsonFileHandler implements IFileHandler
 
     function LoadCustomFile($path){
 
-        if (file_exists($path)) {
+
             $file = fopen($path, "r");
             $contents = fread($file, filesize($path));
             fclose($file);
             $this->SaveFile(json_decode($contents));
-        } else {
-            return false;
-        }
+
     }
 }

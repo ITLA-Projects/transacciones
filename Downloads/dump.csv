@@ -1,0 +1,6 @@
+id,fecha,monto,descripcion
+1,2020/11/13-05:22:05,1000,"Transaccion 1"
+2,2020/11/13-05:22:15,2000,"Transaccion 2"
+3,2020/11/13-05:22:27,3000,"Transaccion 3"
+4,2020/11/13-05:22:35,6250,"Transaccion 4"
+5,2020/11/13-05:22:46,4512,"Transaccion 5"

@@ -22,16 +22,11 @@ class TransaccionServiceFile implements IServiceBase
         $this->filehandler = new JsonFileHandler($this->directory, $this->filename);
     }
 
-    public function GetList($load = false,$path = "")
+    public function GetList()
     {
-        $listadoDeTransaccionesDecoded = array();
-
-        if(!$load){
+        
+    
             $listadoDeTransaccionesDecoded = $this->filehandler->ReadFile();
-        }else{
-            $listadoDeTransaccionesDecoded = $this->filehandler->LoadCustomFile($path);
-        }
-
         
         $listadoTransaccionesLimpio = array();
 
@@ -82,30 +77,6 @@ class TransaccionServiceFile implements IServiceBase
 
         $elementIndex = $this->utilities->getIndexelement($listadoDeTransacciones, 'id', $id);
 
-        //foto
-        if (isset($_FILES['foto'])) {
-
-            $photoFile = $_FILES['foto'];
-
-            if ($photoFile['error'] == 4) {
-                $entity->foto = $element->foto;
-            } else {
-                $typeReplace = str_replace("image/", "", $photoFile['type']);
-                $type = $photoFile['type'];
-                $size = $photoFile['size'];
-                $name = $id . '.' . $typeReplace;
-                $tmpname = $photoFile['tmp_name'];
-
-                $success = $this->utilities->subirFoto('../assets/images/transacciones/', $name, $tmpname, $type, $size);
-
-                if ($success) {
-                    $entity->foto = $name;
-                }
-            }
-        }
-
-        //fin foto
-
         $listadoDeTransacciones[$elementIndex] = $entity;
 
         $this->filehandler->SaveFile($listadoDeTransacciones);
@@ -121,5 +92,14 @@ class TransaccionServiceFile implements IServiceBase
         $listadoDeTransacciones = array_values($listadoDeTransacciones);
 
         $this->filehandler->SaveFile($listadoDeTransacciones);
+    }
+
+    public function addOutside($element){
+
+        $this->filehandler->SaveFile($element);
+    }
+
+    public function getDirtyList(){
+         return $this->filehandler->ReadFile();
     }
 }

@@ -38,15 +38,12 @@ class utilities{
         return time() + 60*60*24*30;
     }
 
-    public function subirFoto($directory,$name,$tmpFile,$type,$size){
+    public function subirArchivo($directory,$name,$tmpFile,$type,$size){
         $isSuccess = false;
 
-        if($type == "image/gif"
-        || $type == "image/jpeg" 
-        || $type == "image/png" 
-        || $type == "image/JPG" 
-        || $type == "image/jpg"
-        || $type == "image/pjpeg" && $size < 1000000){
+        if($type == "application/json"
+        || $type == "text/csv" 
+&& $size < 1000000){
 
 
             if(!file_exists($directory)){

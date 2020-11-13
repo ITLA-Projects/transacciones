@@ -29,16 +29,8 @@ $listadoTransaccions = $service->GetList();
                 </div>
                 <div class="col-md-4">
                     <a href="Transacciones/add.php" class="btn btn-primary my-2">Agregar Transaccion</a>
-                    <form enctype="multipart/form-data" action="loadFile.php" method="POST">
-                        <div class="form-group">
-                            <label for="File">Cargar Archivo</label>
-                            <input type="file" class="form-control" id="file" name="file">
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-success">Cargar Archivo</button>
-                        </div>
-                    </form>
-
+                    <a href="Transacciones/loadFile.php" class="btn btn-secondary my-2">Cargar Archivos</a>
+                    <a href="Transacciones/downloadFile.php" class="btn btn-warning my-2">Descargar CSV</a>
                 </div>
             </div>
         </div>
